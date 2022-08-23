@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+  config-server:
+    image: 'config-server:latest'
+    build:
+      context: .
+      dockerfile: ./config-server/Dockerfile
+    container_name: config-server
+    networks:
+      - default
+      - kafka_config
+    ports:
+      - 8888:8888
+
+  discovery-server:
+    image: 'discovery-server:latest'
+    networks:
+      - default
+      - kafka_config
+    build:
+      context: .
+      dockerfile: ./discovery-server/Dockerfile
+    container_name: discovery-server
+    ports:
+      - 8761:8761
+
+networks:
+  kafka_config:
+    external:
+      name: kafka_config
