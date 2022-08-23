@@ -2,7 +2,7 @@ FROM openjdk:11-jdk
 
 WORKDIR /app
 
-COPY /discovery-server/.mvn/ ./discovery-server/.mvn
+COPY .mvn/ ./discovery-server/.mvn
 COPY /discovery-server/src ./discovery-server/src
 COPY /discovery-server/pom.xml ./discovery-server
 COPY mvnw ./discovery-server
