@@ -1,31 +1,57 @@
 version: '2'
 
 services:
-  config-server:
+  config-service:
     image: 'config-server:latest'
     build:
       context: .
-      dockerfile: ./config-server/Dockerfile
-    container_name: config-server
+      dockerfile: ./config-service/Dockerfile
+    container_name: config-service
     networks:
-      - default
       - providers_config
     ports:
-      - 8888:8888
+      - "8888:8888"
 
-  discovery-server:
-    image: 'discovery-server:latest'
+  discovery-service:
+    image: 'discovery-service:latest'
     depends_on:
-      - config-server
+      - config-service
     networks:
-      - default
       - providers_config
     build:
       context: .
-      dockerfile: ./discovery-server/Dockerfile
-    container_name: discovery-server
+      dockerfile: ./discovery-service/Dockerfile
+    container_name: discovery-service
+    hostname: discovery-service
     ports:
-      - 8761:8761
+      - "8761:8761"
+
+  gateway-service:
+    image: 'gateway-service:latest'
+    depends_on:
+      - config-service
+      - discovery-service
+    networks:
+      - providers_config
+    build:
+      context: .
+      dockerfile: ./gateway-service/Dockerfile
+    container_name: gateway-service
+    ports:
+      - "8080:8080"
+
+  ui-service:
+    image: 'ui-service:latest'
+    depends_on:
+      - gateway-service
+    networks:
+      - providers_config
+    build:
+      context: .
+      dockerfile: ./ui-service/Dockerfile
+    container_name: ui-service
+    expose:
+      - "8081"
 
 networks:
   providers_config:

@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: discovery-service
+  cloud:
+    bus:
+      enabled: true
+      id: config-service
+    stream:
+      kafka:
+        binder:
+          brokers: kafka1:19092
+server:
+  port: 8761
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+  instance:
+    hostname: discovery-service

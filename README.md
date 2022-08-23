@@ -7,8 +7,11 @@ ____
 
 ### Architecture
 
-##### Config server
+##### Config service
 Notifies other services about config changes. It uses Spring Cloud Config Bus with Kafka.
 
-##### Discovery server
-Registers all services, so they can found each other and communicate. Uses Eureka.
+##### Discovery service
+Registers all services, so they can find each other and communicate. Uses Eureka.
+
+##### Gateway service
+Reverse proxy, which hides all infrastructure and routes all requests from single point to all services.

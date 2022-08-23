@@ -18,13 +18,16 @@
 
     <properties>
         <revision>1.0-SNAPSHOT</revision>
-        <config.server.version>1.0-SNAPSHOT</config.server.version>
-        <discovery.server.version>1.0-SNAPSHOT</discovery.server.version>
+        <config.service.version>1.0-SNAPSHOT</config.service.version>
+        <discovery.service.version>1.0-SNAPSHOT</discovery.service.version>
+        <gateway.service.version>1.0-SNAPSHOT</gateway.service.version>
     </properties>
 
     <modules>
-        <module>config-server</module>
-        <module>discovery-server</module>
+        <module>config-service</module>
+        <module>discovery-service</module>
+        <module>gateway-service</module>
+        <module>ui-service</module>
     </modules>
 
 </project>
