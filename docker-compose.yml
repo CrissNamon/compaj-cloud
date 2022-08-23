@@ -9,15 +9,17 @@ services:
     container_name: config-server
     networks:
       - default
-      - kafka_config
+      - providers_config
     ports:
       - 8888:8888
 
   discovery-server:
     image: 'discovery-server:latest'
+    depends_on:
+      - config-server
     networks:
       - default
-      - kafka_config
+      - providers_config
     build:
       context: .
       dockerfile: ./discovery-server/Dockerfile
@@ -26,6 +28,6 @@ services:
       - 8761:8761
 
 networks:
-  kafka_config:
+  providers_config:
     external:
-      name: kafka_config
+      name: providers_config
