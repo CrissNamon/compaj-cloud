@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   application:
     name: gateway-service
@@ -5,33 +7,9 @@ spring:
     web-application-type: reactive
   cloud:
     bus:
-      enabled: true
+      enabled: false
       id: config-service
     stream:
       kafka:
         binder:
           brokers: kafka1:19092
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-        - id: ui-service
-          uri: lb://ui-service
-          predicates:
-            - Path=/ui-service/**
-          filters:
-            - StripPrefix=1
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    enabled: true
-    service-url:
-      defaultZone: http://discovery-service:8761/eureka/
-  instance:
-    hostname: gateway-service
-
-server:
-  port: 8080

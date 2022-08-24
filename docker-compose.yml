@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   config-service:
@@ -44,12 +44,14 @@ services:
     image: 'ui-service:latest'
     depends_on:
       - gateway-service
+    #deploy:
+      #mode: replicated
+      #replicas: 2
     networks:
       - providers_config
     build:
       context: .
       dockerfile: ./ui-service/Dockerfile
-    container_name: ui-service
     expose:
       - "8081"
 
