@@ -5,10 +5,11 @@ services:
     image: confluentinc/cp-zookeeper:7.2.1
     hostname: zoo1
     container_name: zoo1
+    restart: always
     networks:
       - config
-    ports:
-      - "2181:2181"
+    expose:
+      - "2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
@@ -18,12 +19,13 @@ services:
     image: confluentinc/cp-kafka:7.2.1
     hostname: kafka1
     container_name: kafka1
+    restart: always
     networks:
       - config
-    ports:
-      - "9092:9092"
-      - "29092:29092"
-      - "9999:9999"
+    expose:
+      - "9092"
+      - "29092"
+      - "9999"
     environment:
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092,DOCKER://host.docker.internal:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
@@ -45,6 +47,7 @@ services:
     image: jboss/keycloak
     container_name: keycloak
     hostname: keycloak
+    restart: always
     depends_on:
       - postgres_keycloak
     command: ["-Djboss.http.port=9090"]
@@ -76,10 +79,24 @@ services:
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
 
+  redis-session:
+    image: 'bitnami/redis:latest'
+    restart: always
+    container_name: redis-session
+    hostname: redis-session
+    networks:
+      - config
+    expose:
+      - '6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
 networks:
   config:
     driver: bridge
 
 volumes:
   postgres_data:
+    driver: local
+  session_cache:
     driver: local

@@ -10,7 +10,7 @@ COPY pom.xml ./
 
 WORKDIR /app/gateway-service
 
-RUN ./mvnw dependency:go-offline
+#RUN ./mvnw dependency:go-offline
 
 
 CMD ["./mvnw", "spring-boot:run"]

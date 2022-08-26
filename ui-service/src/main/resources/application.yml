@@ -9,6 +9,13 @@ spring:
       kafka:
         binder:
           brokers: kafka1:19092
+  security:
+    oauth2:
+      resourceserver:
+        provider-uri: http://gateway-service:8080
+        jwt:
+          jwk-set-uri: '${spring.security.oauth2.resourceserver.provider-uri}/auth/realms/compaj/protocol/openid-connect/certs'
+          issuer-uri: 'http://localhost:8080/auth/realms/compaj'
 
 eureka:
   client:
@@ -22,3 +29,9 @@ eureka:
 
 server:
   port: 8081
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE

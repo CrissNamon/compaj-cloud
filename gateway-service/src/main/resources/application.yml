@@ -29,17 +29,22 @@ spring:
         - id: keycloak
           uri: '${spring.security.oauth2.client.provider-uri}/'
           predicates:
-            - Path=/auth/realms/**
+            - Path=/auth/**
+          filters:
+            - AddRequestHeader=X-Forwarded-For, ${spring.security.oauth2.client.base-uri}
+            - AddRequestHeader=X-Forwarded-Proto, http
   security:
     oauth2:
       client:
         base-uri: http://localhost:8080
         provider-uri: http://keycloak:9090
+        logout-uri: '${spring.security.oauth2.client.base-uri}/auth/realms/compaj/protocol/openid-connect/logout?redirect_uri=${spring.security.oauth2.client.base-uri}'
         provider:
           keycloak:
             issuer-uri: '${spring.security.oauth2.client.provider-uri}/auth/realms/compaj'
             authorization-uri: '${spring.security.oauth2.client.base-uri}/auth/realms/compaj/protocol/openid-connect/auth'
             user-info-uri: '${spring.security.oauth2.client.base-uri}/auth/realms/compaj/protocol/openid-connect/userinfo'
+            jwk-set-uri: '${spring.security.oauth2.client.provider-uri}/auth/realms/compaj/protocol/openid-connect/certs'
             user-name-attribute: preferred_username
         registration:
           keycloak-spring-gateway-client:
@@ -47,6 +52,11 @@ spring:
             client-id: compaj-cloud-gateway
             client-secret: ifhsRmb6F2EyYubpTsPkXtiiOcPWIzf4
             authorization-grant-type: authorization_code
+  session:
+    store-type: redis
+  redis:
+    host: redis-session
+    port: 6379
 eureka:
   client:
     register-with-eureka: true
@@ -54,5 +64,12 @@ eureka:
     enabled: true
     service-url:
       defaultZone: http://discovery-service:8761/eureka/
+    registry-fetch-interval-seconds: 5
   instance:
     hostname: gateway-service
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
