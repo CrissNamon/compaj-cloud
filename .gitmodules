@@ -1,0 +1,9 @@
+[submodule "compaj-cloud-config"]
+	path = compaj-cloud-config
+	url = https://github.com/HiddenPrj/compaj-cloud-config.git
+[submodule "compaj-cloud-discovery"]
+	path = compaj-cloud-discovery
+	url = https://github.com/HiddenPrj/compaj-cloud-discovery.git
+[submodule "compaj-cloud-gateway"]
+	path = compaj-cloud-gateway
+	url = https://github.com/HiddenPrj/compaj-cloud-gateway.git
