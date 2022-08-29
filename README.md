@@ -9,7 +9,7 @@ ____
 
 ## Services
 
-##### Config service
+##### [Config service](https://github.com/HiddenPrj/compaj-cloud-config)
 Notifies other services about config changes. It uses Spring Cloud Config Bus with Kafka.
 
 ##### Discovery service
