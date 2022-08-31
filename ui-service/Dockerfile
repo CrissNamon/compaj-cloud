@@ -2,13 +2,11 @@ FROM openjdk:11-jdk
 
 WORKDIR /app
 
-COPY .mvn/ ./ui-service/.mvn
-COPY /ui-service/src ./ui-service/src
-COPY /ui-service/pom.xml ./ui-service
-COPY mvnw ./ui-service
-COPY pom.xml ./
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
 
-WORKDIR /app/ui-service
+COPY src ./src
 
 RUN ./mvnw dependency:go-offline
 

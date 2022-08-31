@@ -4,8 +4,8 @@ services:
   config-service:
     image: 'config-server:latest'
     build:
-      context: .
-      dockerfile: ./config-service/Dockerfile
+      context: compaj-cloud-config
+      dockerfile: Dockerfile
     container_name: config-service
     networks:
       - providers_config
@@ -19,8 +19,8 @@ services:
     networks:
       - providers_config
     build:
-      context: .
-      dockerfile: ./discovery-service/Dockerfile
+      context: compaj-cloud-discovery
+      dockerfile: Dockerfile
     container_name: discovery-service
     hostname: discovery-service
     ports:
@@ -33,9 +33,11 @@ services:
       - discovery-service
     networks:
       - providers_config
+    environment:
+      - TZ=Europe/Moscow
     build:
-      context: .
-      dockerfile: ./gateway-service/Dockerfile
+      context: compaj-cloud-gateway
+      dockerfile: Dockerfile
     container_name: gateway-service
     ports:
       - "8080:8080"
@@ -49,9 +51,11 @@ services:
       #replicas: 2
     networks:
       - providers_config
+    environment:
+      - TZ=Europe/Moscow
     build:
-      context: .
-      dockerfile: ./ui-service/Dockerfile
+      context: ui-service
+      dockerfile: Dockerfile
     expose:
       - "8081"
 

@@ -12,10 +12,10 @@ spring:
   security:
     oauth2:
       resourceserver:
-        provider-uri: http://gateway-service:8080
+        provider-uri: http://192.168.1.144:9090
         jwt:
           jwk-set-uri: '${spring.security.oauth2.resourceserver.provider-uri}/auth/realms/compaj/protocol/openid-connect/certs'
-          issuer-uri: 'http://localhost:8080/auth/realms/compaj'
+          issuer-uri: '${spring.security.oauth2.resourceserver.provider-uri}/auth/realms/compaj'
 
 eureka:
   client:

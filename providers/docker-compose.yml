@@ -59,6 +59,7 @@ services:
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
       - PROXY_ADDRESS_FORWARDING=true
+      - KC_PROXY=edge
       - KC_HOSTNAME_STRICT=false
       - DB_VENDOR=postgres
       - DB_ADDR=postgres_keycloak
@@ -66,6 +67,7 @@ services:
       - DB_USER=keycloak
       - DB_SCHEMA=public
       - DB_PASSWORD=password
+      - TZ=Europe/Moscow
 
   postgres_keycloak:
     image: postgres

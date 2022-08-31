@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>compaj-cloud</artifactId>
-        <groupId>tech.hiddenproject</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.3</version>
+        <relativePath/>
     </parent>
 
     <artifactId>ui-service</artifactId>
-    <version>${gateway.server.version}</version>
+    <version>1.0</version>
     <name>ui-service</name>
     <description>ui-service</description>
 
