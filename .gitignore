@@ -16,7 +16,7 @@ target/
 ### IntelliJ IDEA ###
 .idea
 *.iws
-*.iml
+**/*.iml
 *.ipr
 
 ### NetBeans ###
@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/compaj-cloud-processor/processor-service.iml

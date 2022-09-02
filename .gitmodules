@@ -7,3 +7,6 @@
 [submodule "compaj-cloud-gateway"]
 	path = compaj-cloud-gateway
 	url = https://github.com/HiddenPrj/compaj-cloud-gateway.git
+[submodule "compaj-cloud-processor"]
+	path = compaj-cloud-processor
+	url = https://github.com/HiddenPrj/compaj-cloud-processor.git
