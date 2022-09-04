@@ -42,19 +42,22 @@ services:
     ports:
       - "8080:8080"
 
-  ui-service:
-    image: 'ui-service:latest'
+  processor-service:
+    image: 'processor-service:latest'
     depends_on:
       - gateway-service
     #deploy:
       #mode: replicated
       #replicas: 2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/local/bin/docker
     networks:
       - providers_config
     environment:
       - TZ=Europe/Moscow
     build:
-      context: ui-service
+      context: compaj-cloud-processor
       dockerfile: Dockerfile
     expose:
       - "8081"
